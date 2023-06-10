@@ -54,12 +54,11 @@ group :development do
 end
  group :test do
   gem 'capybara'
-  gem 'faker'
   gem 'launchy'
   gem 'orderly'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
-  gem 'vcr'
   gem 'webmock'
+  gem 'vcr'
  end
