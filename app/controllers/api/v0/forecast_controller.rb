@@ -5,8 +5,7 @@ class Api::V0::ForecastController < ApplicationController
     lat = response[:results][0][:locations][0][:latLng][:lat]
     lon = response[:results][0][:locations][0][:latLng][:lng]
     
-    new_response = Faraday.get("http://api.weatherapi.com/v1/forecast.json?key=#{ENV['WEATHER_KEY']}&q=#{lat},#{lon}&days=5&aqi=no&alerts=no']}")
-    new_parsed = JSON.parse(new_response.body, symbolize_names: true)
+    new_response = WeatherService.new.get_weather(lat, lon)
     require 'pry'; binding.pry
   end
 end
