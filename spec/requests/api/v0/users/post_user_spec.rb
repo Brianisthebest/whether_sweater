@@ -50,7 +50,7 @@ RSpec.describe 'Users API' do
       user_params = {
         'email': 'alreadytaken@gmail.com',
         'password': 'password',
-        'password_confirmation': 'password123'
+        'password_confirmation': 'password'
       }
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -63,7 +63,26 @@ RSpec.describe 'Users API' do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(json).to have_key(:error)
-      expect(json[:error]).to eq("Validation failed: Email must be unique")
+      expect(json[:error]).to eq("Validation failed: Email has already been taken")
+    end
+
+    it 'send an error if a field is missing' do      
+      user_params = {
+        'password': 'password',
+        'password_confirmation': 'password'
+      }
+
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+
+      post '/api/v0/users', headers: headers, params: JSON.generate(user: user_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json).to have_key(:error)
+      expect(json[:error]).to eq("Validation failed: Email can't be blank")
     end
   end
 end
