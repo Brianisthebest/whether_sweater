@@ -1,7 +1,10 @@
 class ForecastFacade
   def get_forecast(location)
     mapquest = mapquest_service.get_lat_lng(location)
-    weather = weather_service.get_weather(mapquest[:results][0][:locations][0][:latLng][:lat], mapquest[:results][0][:locations][0][:latLng][:lng])
+    lat = mapquest[:results][0][:locations][0][:latLng][:lat]
+    lng = mapquest[:results][0][:locations][0][:latLng][:lng]
+    
+    weather = weather_service.get_weather(lat, lng)
   
     current_weather = {
       last_updated: weather[:current][:last_updated],
