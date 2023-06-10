@@ -1,11 +1,15 @@
 class Api::V0::UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
+
   def create
-    @user = User.new(user_params)
+    @user = User.create!(user_params)
     @user.api_key = SecureRandom.hex
 
-    if @user.save
-      render json: UsersSerializer.new(@user), status: 201
-    end
+    render json: UsersSerializer.new(@user), status: 201
+  end
+
+  def render_invalid_response(error)
+    render json: { error: error.message }, status: 400
   end
 
   private
