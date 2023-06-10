@@ -11,7 +11,7 @@ RSpec.describe 'Users API' do
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
-      post '/api/v0/users', headers: headers, params: JSON.generate(user_params)
+      post '/api/v0/users', headers: headers, params: JSON.generate(user: user_params)
 
       created_user = User.last
       json = JSON.parse(response.body, symbolize_names: true)
