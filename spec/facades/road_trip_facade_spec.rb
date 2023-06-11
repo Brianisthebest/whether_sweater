@@ -12,7 +12,7 @@ RSpec.describe RoadTripFacade do
     expect(road_trip.travel_time).to be_a(String)
     expect(road_trip.weather_at_eta).to be_a(Hash)
     expect(road_trip.weather_at_eta).to have_key(:datetime)
-    expect(road_trip.weather_at_eta).to have_key(:temperatue)
-    expect(road_trip.weather_at_eta).to have_key(:condition)
+    expect(road_trip.weather_at_eta).to have_key(:temperature)
+    expect(road_trip.weather_at_eta).to have_key(:conditions)
   end
 end

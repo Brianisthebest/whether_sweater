@@ -34,7 +34,7 @@ RSpec.describe 'Road trip API' do
       expect(json[:data][:attributes]).to have_key(:weather_at_eta)
       expect(json[:data][:attributes][:weather_at_eta]).to have_key(:datetime)
       expect(json[:data][:attributes][:weather_at_eta]).to have_key(:temperature)
-      expect(json[:data][:attributes][:weather_at_eta]).to have_key(:condition)
+      expect(json[:data][:attributes][:weather_at_eta]).to have_key(:conditions)
     end
   end
 end
