@@ -1,12 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe WeatherService do
-  it 'returns a hash' do
-    lat = 38.83352
-    lng = -104.82181
+  describe 'get_weather' do
+    it 'returns a hash' do
+      lat = 38.83352
+      lng = -104.82181
+  
+      response = WeatherService.new.get_weather(lat, lng)
+  
+      expect(response).to be_a(Hash)
+    end
+  end
 
-    response = WeatherService.new.get_weather(lat, lng)
+  describe 'get_future_weather' do
+    it 'returns a hash' do
+      lat = 38.83352
+      lon = -104.82181
+      dt = 2023-07-09
+      hour = 12
 
-    expect(response).to be_a(Hash)
+      response = WeatherService.new.get_future_weather(lat, lon, dt, hour)
+
+      expect(response).to be_a(Hash)
+    end
   end
 end
