@@ -16,7 +16,7 @@ RSpec.describe WeatherService do
     it 'returns a hash' do
       lat = 38.83352
       lon = -104.82181
-      dt = 2023-07-09
+      dt = "2023-07-09".to_time
       hour = 12
 
       response = WeatherService.new.get_future_weather(lat, lon, dt, hour)

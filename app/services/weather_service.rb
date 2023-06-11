@@ -1,6 +1,10 @@
 class WeatherService
   def get_weather(lat, lng)
-    get_url("/v1/forecast.json?&q=#{lat},#{lng}&days=5&aqi=no&alerts=no")
+    get_url("/v1/forecast.json?q=#{lat},#{lng}&days=5&aqi=no&alerts=no")
+  end
+
+  def get_future_weather(lat, lon, dt, hour)
+    get_url("/v1/future.json?q=#{lat},#{lon}&dt=#{dt}&hour=#{hour}")
   end
 
   def get_url(url)
