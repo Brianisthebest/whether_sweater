@@ -8,11 +8,10 @@ class Api::V1::BooksController < ApplicationController
     json = JSON.parse(books.body, symbolize_names: true)
 
     books_hash = json[:docs].map do |book|
-      require 'pry'; binding.pry
       {
-        isbn: books[:isbn],
-        title: books[:title],
-        publisher: books[:publisher]
+        isbn: book[:isbn],
+        title: book[:title],
+        publisher: book[:publisher]
       }
     end
 
