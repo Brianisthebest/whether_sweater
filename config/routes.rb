@@ -10,5 +10,8 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :road_trip, only: [:create]
     end
+    namespace :v1 do
+      get '/book-search', to: 'books#index'
+    end
   end
 end
