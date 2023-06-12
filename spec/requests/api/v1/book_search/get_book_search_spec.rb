@@ -32,43 +32,16 @@ RSpec.describe 'Book Search API' do
       expect(json[:data][:attributes][:books][0]).to have_key(:title)
       expect(json[:data][:attributes][:books][0]).to have_key(:publisher)
     end
+
+    it 'returns a 400 error if no location is provided' do
+      get "/api/v1/book-search?location=&quantity=5"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:error]).to eq('Please provide a location')
+    end
   end
 end
-
-# {
-#   "data": {
-#     "id": "null",
-#     "type": "books",
-#     "attributes": {
-#       "destination": "denver,co",
-#       "forecast": {
-#         "summary": "Cloudy with a chance of meatballs",
-#         "temperature": "83 F"
-#       },
-#       "total_books_found": 172,
-#       "books": [
-#         {
-#           "isbn": [
-#             "0762507845",
-#             "9780762507849"
-#           ],
-#           "title": "Denver, Co",
-#           "publisher": [
-#             "Universal Map Enterprises"
-#           ]
-#         },
-#         {
-#           "isbn": [
-#             "9780883183663",
-#             "0883183668"
-#           ],
-#           "title": "Photovoltaic safety, Denver, CO, 1988",
-#           "publisher": [
-#             "American Institute of Physics"
-#           ]
-#         },
-#         { ... same format for books 3, 4 and 5 ... }
-#       ]
-#     }
-#   }
-# }
