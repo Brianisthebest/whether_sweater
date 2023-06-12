@@ -5,6 +5,7 @@ class BookSearch
               :forecast,
               :total_books_found,
               :books
+              
   def initialize(data)
     @id = 'null'
     @type = 'books'
