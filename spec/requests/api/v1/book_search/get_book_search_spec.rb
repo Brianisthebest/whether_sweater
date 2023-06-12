@@ -43,5 +43,16 @@ RSpec.describe 'Book Search API' do
 
       expect(json[:error]).to eq('Please provide a location')
     end
+
+    it 'returns a 400 error if the quantity is less than 1' do
+      get "/api/v1/book-search?location=denver,co&quantity=-1"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:error]).to eq('Please provide a valid quantity')
+    end
   end
 end
