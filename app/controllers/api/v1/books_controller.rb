@@ -22,6 +22,9 @@ class Api::V1::BooksController < ApplicationController
              total_books_found: json[:numFound],
              books: books_hash
             }
-require 'pry'; binding.pry
+
+            book_search = Book.new(books)
+
+            render json: BooksSerializer.new(book_search)
   end
 end

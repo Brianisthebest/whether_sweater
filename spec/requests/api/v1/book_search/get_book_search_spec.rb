@@ -24,13 +24,13 @@ RSpec.describe 'Book Search API' do
       expect(json[:data][:attributes][:forecast]).to have_key(:summary)
       expect(json[:data][:attributes][:forecast]).to have_key(:temperature)
       expect(json[:data][:attributes]).to have_key(:total_books_found)
-      expect(json[:data]).to have_key(:books)
-      expect(json[:data][:books]).to be_a(Array)
-      expect(json[:data][:books].count).to eq(5)
-      expect(json[:data][:books][0]).to be_a(Hash)
-      expect(json[:data][:books][0]).to have_key(:isbn)
-      expect(json[:data][:books][0]).to have_key(:title)
-      expect(json[:data][:books][0]).to have_key(:publisher)
+      expect(json[:data][:attributes]).to have_key(:books)
+      expect(json[:data][:attributes][:books]).to be_a(Array)
+      expect(json[:data][:attributes][:books].count).to eq(5)
+      expect(json[:data][:attributes][:books][0]).to be_a(Hash)
+      expect(json[:data][:attributes][:books][0]).to have_key(:isbn)
+      expect(json[:data][:attributes][:books][0]).to have_key(:title)
+      expect(json[:data][:attributes][:books][0]).to have_key(:publisher)
     end
   end
 end
