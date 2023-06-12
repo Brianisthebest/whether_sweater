@@ -4,6 +4,9 @@ RSpec.describe 'Road trip API' do
   describe 'POST /api/v0/road_trip' do
     it 'returns a road trip object if credentials are correct' do
       user = create(:user)
+      create(:user)
+      create(:user)
+      
       road_trip_params = {
         "origin": "new york, ny",
         "destination": "los angeles, ca",
