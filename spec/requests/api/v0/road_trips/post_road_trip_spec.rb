@@ -36,5 +36,28 @@ RSpec.describe 'Road trip API' do
       expect(json[:data][:attributes][:weather_at_eta]).to have_key(:temperature)
       expect(json[:data][:attributes][:weather_at_eta]).to have_key(:conditions)
     end
+
+    it 'returns an errors message if the api key is invalid' do
+      road_trip_params = {
+        "origin": "new york, ny",
+        "destination": "los angeles, ca",
+        "api_key": "invalidkey"
+      }
+
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+
+      post "/api/v0/road_trip", headers: headers, params: JSON.generate(road_trip: road_trip_params)
+    end
+  
+    it 'returns an errors message if the api key is invalid' do
+      road_trip_params = {
+        "origin": "new york, ny",
+        "destination": "los angeles, ca"
+      }
+
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+
+      post "/api/v0/road_trip", headers: headers, params: JSON.generate(road_trip: road_trip_params)
+    end
   end
 end
