@@ -1,31 +1,7 @@
 class Api::V1::BooksController < ApplicationController
   def index
-    books = BookSearchService.new.get_books(params[:location], params[:quantity])
-    require 'pry'; binding.pry
-    mapquest = MapquestService.new.get_lat_lng(params[:location])
-    lat = mapquest[:results][0][:locations][0][:latLng][:lat]
-    lng = mapquest[:results][0][:locations][0][:latLng][:lng]
-    weather = WeatherService.new.get_weather(lat, lng)
-    json = JSON.parse(books.body, symbolize_names: true)
+    book_search = BookSearchFacade.new.get_books(params[:location], params[:quantity])
 
-    books_hash = json[:docs].map do |book|
-      {
-        isbn: book[:isbn],
-        title: book[:title],
-        publisher: book[:publisher]
-      }
-    end
-
-    books = {destination: params[:location],
-             forecast: { summary: weather[:current][:condition][:text],
-                           temperature: weather[:current][:temp_f]
-                          },
-             total_books_found: json[:numFound],
-             books: books_hash
-            }
-
-            book_search = Book.new(books)
-
-            render json: BooksSerializer.new(book_search)
+    render json: BooksSerializer.new(book_search)
   end
 end
