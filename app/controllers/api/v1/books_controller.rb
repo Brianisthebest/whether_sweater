@@ -6,6 +6,23 @@ class Api::V1::BooksController < ApplicationController
     lng = mapquest[:results][0][:locations][0][:latLng][:lng]
     weather = WeatherService.new.get_weather(lat, lng)
     json = JSON.parse(books.body, symbolize_names: true)
-    require 'pry'; binding.pry
+
+    books_hash = json[:docs].map do |book|
+      require 'pry'; binding.pry
+      {
+        isbn: books[:isbn],
+        title: books[:title],
+        publisher: books[:publisher]
+      }
+    end
+
+    books = {destination: params[:location],
+             forecast: { summary: weather[:current][:condition][:text],
+                           temperature: weather[:current][:temp_f]
+                          },
+             total_books_found: json[:numFound],
+             books: books_hash
+            }
+require 'pry'; binding.pry
   end
 end
