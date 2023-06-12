@@ -1,6 +1,5 @@
 class Api::V1::BooksController < ApplicationController
   def index
-    # books = Faraday.get("https://openlibrary.org/search.json?q=#{params[:location]}&fields=*,availability&limit=#{params[:quantity]}")
     books = BookSearchService.new.get_books(params[:location], params[:quantity])
     require 'pry'; binding.pry
     mapquest = MapquestService.new.get_lat_lng(params[:location])
