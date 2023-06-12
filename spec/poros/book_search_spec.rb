@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Book do
+RSpec.describe BookSearch do
   describe 'intialize' do
     it 'exists and has attributes' do
       books_data = {destination: "colorado springs,co",
@@ -13,9 +13,9 @@ RSpec.describe Book do
                 publisher: ["Universal Map Enterprises"]}]
        }
 
-       books = Book.new(books_data)
+       books = BookSearch.new(books_data)
 
-       expect(books).to be_a(Book)
+       expect(books).to be_a(BookSearch)
        expect(books.destination).to eq("colorado springs,co")
        expect(books.forecast).to be_a(Hash)
        expect(books.forecast[:summary]).to eq('cloudy with some meatballs')

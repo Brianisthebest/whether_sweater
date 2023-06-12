@@ -1,4 +1,4 @@
-class Book
+class BookSearch
   attr_reader :id, 
               :type,
               :destination,

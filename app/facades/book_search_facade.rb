@@ -16,7 +16,7 @@ class BookSearchFacade
       books: hash_books(@books)
      }
 
-    Book.new(books)
+    BookSearch.new(books)
   end
 
   def hash_books(book_search)

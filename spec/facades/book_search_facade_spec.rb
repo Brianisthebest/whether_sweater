@@ -5,7 +5,7 @@ RSpec.describe BookSearchFacade do
     it 'returns a book object' do
       book_search = BookSearchFacade.new.get_books('denver, co', 5)
 
-      expect(book_search).to be_a(Book)
+      expect(book_search).to be_a(BookSearch)
       expect(book_search.id).to eq('null')
       expect(book_search.type).to eq('books')
       expect(book_search.destination).to eq('denver, co')
