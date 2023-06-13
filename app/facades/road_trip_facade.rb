@@ -1,16 +1,14 @@
-require 'rounding'
-
 class RoadTripFacade
   def get_road_trip(origin, destination)
     trip = MapquestService.new.get_directions(origin, destination)
 
     if trip[:info][:statuscode] == 402
-      road_trip = RoadTrip.new(origin, destination, 'impossible route', {})
+      RoadTrip.new(origin, destination, 'impossible route', {})
     else
       lat = trip[:route][:locations][1][:latLng][:lat]
       lng = trip[:route][:locations][1][:latLng][:lng]
       travel_time = trip[:route][:formattedTime]
-  
+
       time = Time.now + trip[:route][:realTime]
       rounded_time = time.round_to(60*60)
       date = time.strftime("%Y-%m-%d")
@@ -33,7 +31,6 @@ class RoadTripFacade
           end
         end
       end
-  
       RoadTrip.new(origin, destination, travel_time, @weather_at_eta)
     end
   end
