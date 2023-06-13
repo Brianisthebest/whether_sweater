@@ -6,7 +6,11 @@ class ForecastFacade
     
     weather = weather_service.get_weather(lat, lng)
   
-    current_weather = {
+    Forecast.new(set_current_weather(weather), set_daily_weather(weather), set_hourly_weather(weather))
+  end
+
+  def set_current_weather(weather)
+    {
       last_updated: weather[:current][:last_updated],
       temperature: weather[:current][:temp_f],
       feels_like: weather[:current][:feelslike_f],
@@ -16,8 +20,10 @@ class ForecastFacade
       condition: weather[:current][:condition][:text],
       icon: weather[:current][:condition][:icon]
     }
+  end
 
-    daily_weather = weather[:forecast][:forecastday].map do |day|
+  def set_daily_weather(weather)
+    weather[:forecast][:forecastday].map do |day|
       {
         date: day[:date],
         sunrise: day[:astro][:sunrise],
@@ -28,8 +34,10 @@ class ForecastFacade
         icon: day[:day][:condition][:icon]
       }
     end
+  end
 
-    hourly_weather = weather[:forecast][:forecastday].first[:hour].map do |hour| 
+  def set_hourly_weather(weather)
+    weather[:forecast][:forecastday].first[:hour].map do |hour| 
       {
         time: hour[:time].split[1],
         temperature: hour[:temp_f],
@@ -37,8 +45,6 @@ class ForecastFacade
         icon: hour[:condition][:icon]
       }
     end
-
-    Forecast.new(current_weather, daily_weather, hourly_weather)
   end
 
   def mapquest_service
