@@ -7,8 +7,7 @@ RSpec.describe 'Sessions API' do
 
       user_params = {
         "email": user.email,
-        "password": user.password,
-        "password_confirmation": user.password
+        "password": user.password
       }
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -31,8 +30,7 @@ RSpec.describe 'Sessions API' do
 
       user_params = {
         "email": user.email,
-        "password": user.password,
-        "password_confirmation": "wrongpassword"
+        "password": "wrongpassword"
       }
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -53,8 +51,7 @@ RSpec.describe 'Sessions API' do
 
       user_params = {
         "email": "nottherightemail@gmail.com",
-        "password": user.password,
-        "password_confirmation": user.password
+        "password": user.password
       }
 
       headers = { 'CONTENT_TYPE' => 'application/json' }

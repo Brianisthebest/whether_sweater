@@ -8,5 +8,7 @@ RSpec.describe ForecastFacade do
     expect(forecast.id).to eq('null')
     expect(forecast.type).to eq('forecast')
     expect(forecast.current_weather).to be_a(Hash)
+    expect(forecast.daily_weather).to be_an(Array)
+    expect(forecast.hourly_weather).to be_an(Array)
   end
 end
