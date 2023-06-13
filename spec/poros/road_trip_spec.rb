@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RoadTrip do
   describe 'initialize' do
-    it 'exists and has attributes' do
+    it 'exists and has attributes', :vcr do
       road_trip = RoadTripFacade.new.get_road_trip('new york, ny', 'los angeles, ca')
 
       expect(road_trip).to be_a(RoadTrip)

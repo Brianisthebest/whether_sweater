@@ -1,6 +1,6 @@
 class RoadTripFacade
   def get_road_trip(origin, destination)
-    trip = MapquestService.new.get_directions(origin, destination)
+    trip = mapquest_service.get_directions(origin, destination)
 
     if trip[:info][:statuscode] == 402
       RoadTrip.new(origin, destination, 'impossible route', {})
@@ -16,7 +16,7 @@ class RoadTripFacade
   
       full_time = date + ' ' + arrival_time
       
-      weather = WeatherService.new.get_weather(lat, lng)
+      weather = weather_service.get_weather(lat, lng)
   
       weather[:forecast][:forecastday].map do |day|
         if day[:date] == date
@@ -33,5 +33,13 @@ class RoadTripFacade
       end
       RoadTrip.new(origin, destination, travel_time, @weather_at_eta)
     end
+  end
+
+  def mapquest_service
+    @mapquest_service ||= MapquestService.new
+  end
+
+  def weather_service
+    @weather_service ||= WeatherService.new
   end
 end

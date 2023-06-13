@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RoadTripFacade do
-  it 'returns a road_trip object' do
+  it 'returns a road_trip object', :vcr do
     road_trip = RoadTripFacade.new.get_road_trip('new york, ny', 'los angeles, ca')
 
     expect(road_trip).to be_a(RoadTrip)

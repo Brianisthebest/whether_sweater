@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MapquestService do
-  describe 'get_lat_lng' do
+  describe 'get_lat_lng', :vcr do
     it 'returns a hash' do
       location = 'colorado springs,co'
   
@@ -13,7 +13,7 @@ RSpec.describe MapquestService do
     end
   end
 
-  describe 'get_directions' do
+  describe 'get_directions', :vcr do
     it 'returns a hash' do
       origin = 'new york, ny'
       destination = 'los angeles, ca'

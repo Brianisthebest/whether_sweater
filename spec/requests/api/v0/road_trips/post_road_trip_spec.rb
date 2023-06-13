@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Road trip API' do
-  describe 'POST /api/v0/road_trip' do
+  describe 'POST /api/v0/road_trip', :vcr do
     it 'returns a road trip object if credentials are correct' do
       user = create(:user)
       create(:user)

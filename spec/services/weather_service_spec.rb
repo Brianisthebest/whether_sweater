@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe WeatherService do
-  describe 'get_weather' do
+  describe 'get_weather', :vcr do
     it 'returns a hash' do
       lat = 38.83352
       lng = -104.82181

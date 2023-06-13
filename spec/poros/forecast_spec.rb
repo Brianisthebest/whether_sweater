@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Forecast do
   describe 'intialize' do
-    it 'exists and has attributes' do
+    it 'exists and has attributes', :vcr do
       forecast = ForecastFacade.new.get_forecast('colorado springs,co')
 
       expect(forecast).to be_a(Forecast)
