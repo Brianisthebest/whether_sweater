@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Forecast API' do
-  it 'sends a forecast for a city' do
+  it 'sends a forecast for a city', :vcr do
     location = 'colorado springs,co'
 
     get "/api/v0/forecast?location=#{location}"
@@ -20,7 +20,7 @@ RSpec.describe 'Forecast API' do
     expect(json[:data][:attributes]).to have_key(:hourly_weather)
   end
 
-  it 'sends an error if no location is sent' do
+  it 'sends an error if no location is sent', :vcr do
     location = ''
 
     get "/api/v0/forecast?location=#{location}"

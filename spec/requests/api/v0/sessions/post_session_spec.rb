@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions API' do
-  describe 'POST /api/v0/sessions' do
+  describe 'POST /api/v0/sessions', :vcr do
     it 'returns a user if credentials are correct' do
       user = create(:user)
 

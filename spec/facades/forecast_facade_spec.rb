@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ForecastFacade do
-  it 'returns a forecast object' do
+  it 'returns a forecast object', :vcr do
     forecast = ForecastFacade.new.get_forecast('colorado springs,co')
 
     expect(forecast).to be_a(Forecast)

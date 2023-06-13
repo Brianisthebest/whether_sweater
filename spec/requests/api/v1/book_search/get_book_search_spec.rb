@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Book Search API' do
-  describe 'GET /api/v1/book_search' do
+  describe 'GET /api/v1/book_search', :vcr do
     it 'returns a destination city, forecast in the city right now, total nuber of search results, a quantity of books about the city' do
       get "/api/v1/book-search?location=denver,co&quantity=5"
 
